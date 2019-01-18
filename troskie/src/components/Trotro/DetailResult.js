@@ -79,23 +79,6 @@ export default class DetailResult extends Component {
         // this.props.navigation.navigate('ShowResult',{start: sta, stop: des});
         // this.setState({mydestination: ''});
 
-        // if(sta=='Madina' && des=='Koffee Lounge'){
-        // this.setState({
-        //     trotro: [
-        //         {time: 'Accra', description: 'Tema- Station', lineColor: 'red'},
-        //         {time: 'Chorkor', description: 'Police Station', lineColor: 'yellow'}
-        //     ]
-        // });
-        // }
-
-        // if(sta=='Lapaz' && des=='Koffee Lounge'){
-        //     this.setState({
-        //         trotro: [
-        //             {time: 'Tema', description: 'Tema- Station', lineColor: 'red'},
-        //             {time: 'London', description: 'Police Station', lineColor: 'yellow'}
-        //         ]
-        //     });
-        //     }
     }
 }
 

@@ -18,12 +18,12 @@ export default class ShowResult extends Component {
     componentDidMount(){
       this.setState({
         trotro:[
-          {time: 'Accra', description: 'Tema- Station', lineColor: 'red'},
-          {time: 'Chorkor', description: 'Police Station', lineColor: 'yellow'},
-          {time: 'Chorkor', description: 'Police Station', lineColor: 'green'},
-          {time: 'Accra', description: 'Tema- Station', lineColor: 'blue'},
-          // {beg: 'Accra', end: 'Tema- Station', walk: ''},
-          // {beg: 'Chorkor', end: 'Police Station', walk:'4min toward me'}
+          // {time: 'Accra', description: 'Tema- Station', lineColor: 'red'},
+          // {time: 'Chorkor', description: 'Police Station', lineColor: 'yellow'},
+          // {time: 'Chorkor', description: 'Police Station', lineColor: 'green'},
+          // {time: 'Accra', description: 'Tema- Station', lineColor: 'blue'},
+          {beg: 'Accra', end: 'Tema- Station', walk: ''},
+          {beg: 'Chorkor', end: 'Police Station', walk:'4min toward me'}
         ]
       });
     }
@@ -63,10 +63,10 @@ export default class ShowResult extends Component {
       </View>
 
       <View style={{marginTop: 20}}>
-      <ScrollView>
+      {/* <ScrollView>
         <Timeline data={this.state.trotro} />
-      </ScrollView>
-      {/* <View style={{width: "100%", backgroundColor: 'blue'}}>
+      </ScrollView> */}
+      <View style={{width: "100%", backgroundColor: '#FBB41A'}}>
       <Text style={{textAlign:'center'}}>{this.state.start}</Text>
         {this.state.trotro.map((item)=>{
           return(
@@ -83,7 +83,7 @@ export default class ShowResult extends Component {
           )
         })}
       <Text style={{textAlign:'center'}}>{this.state.stop}</Text>
-      </View> */}
+      </View>
       </View>
         {/* <Text>Show Results</Text> */}
       </View>
