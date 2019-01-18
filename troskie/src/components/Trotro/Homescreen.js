@@ -10,6 +10,7 @@ import Highlights from './Highlights';
 import Art from './Art';
 import Shopping from './Shopping';
 import More from './More';
+import MyPicker from './MyPicker';
 
 class Homescreen extends Component {
   constructor(props){
@@ -22,6 +23,9 @@ class Homescreen extends Component {
       data:[],
       me: 'hey'
     }
+
+    this.valueChange = this.valueChange.bind(this);
+    this.valueChanged = this.valueChanged.bind(this);
   }
 
   componentDidMount(){
@@ -64,7 +68,9 @@ class Homescreen extends Component {
     });
   }
 
-  valueChange(sta, des){
+  //valueChange(sta, des){
+    valueChange(sta){
+      var des = this.state.mydestination;
     this.setState({mystation: sta});
     if(des==''&& sta=='' || sta==''&&des!=='' || sta!=='' && des==''){
         return false;
@@ -74,7 +80,8 @@ class Homescreen extends Component {
     }
 }
 
-  valueChanged(des, sta){
+  valueChanged(des){
+    var sta = this.state.mystation;
     this.setState({mydestination: des});
     if(sta==''&& des=='' || sta==''&&des!=='' || sta!=='' && des==''){
         return false;
@@ -96,17 +103,28 @@ class Homescreen extends Component {
     )
   }
   render() {
-    console.log(this.state.data);
+    //console.log(this.state.data);
     return (
       <View style={{flex:1}}>
       <StatusBar backgroundColor="#FBB41A" />
       <View style={styles.yellow}>
-      <View style={{flex:1}}>
+      <MyPicker station={this.state.station}
+      mystation={this.state.mystation}
+      labelName="Select A Starting Station" 
+      name="Starting Station" 
+      valueChange={this.valueChange} />
+
+      {/* <MyPicker station={this.state.destination}
+      mystation={this.state.mydestination}
+      labelName="Select A Destination Station" 
+      name="Destination Station" 
+      valueChange={this.valueChanged} /> */}
+      {/* <View style={{flex:1}}>
       <Text style={{padding : 3}}>Starting Station</Text>
         <View style={{width: '100%', height: 50, alignItems: 'center', marginTop: 5}}>
         <Picker mode="dropdown" style={{width: '90%', backgroundColor: 'white'}}
         selectedValue={this.state.mystation}
-        onValueChange={(itemValue)=>this.valueChange(itemValue, this.state.mydestination)}
+        onValueChange={(itemValue)=>this.valueChange(itemValue)}
         >
           <Picker.Item label="Select A Starting Station" value="" />
           {this.state.station.map((item)=>{
@@ -116,7 +134,7 @@ class Homescreen extends Component {
           })}
         </Picker>
         </View>
-      </View>
+      </View> */}
 
       <View style={{flex: 1}}>
       <Text style={{padding : 3}}>Destination</Text>

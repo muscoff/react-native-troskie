@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image, ScrollView, 
+import {StyleSheet, Text, View, Image, ScrollView, 
   TouchableWithoutFeedback, StatusBar} from 'react-native';
-import * as Animatable from 'react-native-animatable';
+import HorizontalWrap from './HorizontalWrap';
 
 export default class Restaurant extends Component {
   constructor(props){
@@ -11,6 +11,7 @@ export default class Restaurant extends Component {
       continentalRestaurant:[],
       africanRestaurant:[]
     }
+    this.navigate = this.navigate.bind(this);
   }
   componentDidMount(){
     this.setState({
@@ -26,6 +27,10 @@ export default class Restaurant extends Component {
 
     // this.africanApi();
     // this.continentalApi();
+  }
+
+  navigate = (name, source) => {
+    this.props.navigation.navigate('Details', {name: name, src: source})
   }
 
   africanApi(){
@@ -50,64 +55,8 @@ export default class Restaurant extends Component {
         <Text style={styles.rest}>Restaurant</Text>
       </View>
         <ScrollView>
-          <View style={styles.continental}>
-          <Text style={{color:'#fff', fontSize: 20, padding: 5}}>Continental</Text>
-            <View style={styles.mainContain}>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                {this.state.restaurant.map((item)=>{
-                  return (
-                    <View style={styles.scontain} key={item.name}>
-                      <TouchableWithoutFeedback
-                      onPress={()=>this.props.navigation.navigate('Details',{name: item.name, src:item.src})}>
-                        <Image source={item.src} style={styles.image} />
-                      </TouchableWithoutFeedback>
-                      <View style={styles.xcontain}>
-                        <Text style={styles.text}>{item.name}</Text>
-                      </View>
-                    </View>
-                  )
-                })}
-              </ScrollView>
-            </View>
-          </View>
-
-          <View style={styles.continental}>
-          <Text style={{color:'#fff', fontSize: 20, padding: 5}}>African</Text>
-            <View style={styles.mainContain}>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                {this.state.restaurant.map((item)=>{
-                  return (
-                    <View style={styles.scontain} key={item.name}>
-                      <TouchableWithoutFeedback
-                      onPress={()=>this.props.navigation.navigate('Details',{name: item.name, src:item.src})}>
-                        <Image source={item.src} style={styles.image} />
-                      </TouchableWithoutFeedback>
-                      <View style={styles.xcontain}>
-                        <Text style={styles.text}>{item.name}</Text>
-                      </View>
-                    </View>
-                  )
-                })}
-              </ScrollView>
-            </View>
-          </View>
-          {/* <View style={styles.contain}>
-            {this.state.restaurant.map((item)=>{
-              return (
-                <View style={styles.smallContain} key={item.name.toString()}>
-                  <View>
-                  <TouchableWithoutFeedback
-                onPress={()=>this.props.navigation.navigate('Details',{name: item.name, src:item.src})}>
-                    <Image source={item.src} style={styles.image} />
-                    </TouchableWithoutFeedback>
-                    <View style={styles.xcontain}>
-                      <Text style={styles.text}>{item.name}</Text>
-                    </View>
-                  </View>
-                </View>
-              )
-            })} 
-          </View> */}
+          <HorizontalWrap restaurant={this.state.restaurant} name="Continental" navigate={this.navigate} />
+          <HorizontalWrap restaurant={this.state.restaurant} name="African" navigate={this.navigate} />
         </ScrollView>
       </View>
     );
@@ -133,58 +82,5 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 10,
     fontWeight: 'bold'
-  },
-  image:{
-    width: "100%",
-    height: 200,
-    borderRadius: 10,
-  },
-  contain:{
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  },
-  smallContain:{
-    width: "48%", 
-    marginLeft: "1%", 
-    marginRight: "1%", 
-    marginBottom: 30, 
-    height: 200, 
-    backgroundColor: 'red', 
-    borderRadius: 10
-  },
-  xcontain:{
-    position: 'absolute', 
-    bottom: 0, 
-    width:180, 
-    height:50, 
-    backgroundColor: '#353a50', 
-    borderBottomLeftRadius:10, 
-    borderBottomRightRadius: 10, 
-    // justifyContent: 'center'
-  },
-  text:{
-    paddingLeft: 5, 
-    fontSize: 15,
-    color:'#fff'
-  },
-  continental:{
-    width: '100%',
-    height: 230,
-    marginBottom: 30
-    //backgroundColor: 'red'
-  },
-  scontain:{
-    width: 180, 
-    height: 200, 
-    // backgroundColor: 'green', 
-    marginLeft: 10, 
-    marginRight: 10, 
-    borderRadius: 10
-  },
-  mainContain:{
-    // backgroundColor: 'yellow', 
-    width: '100%', 
-    height: 200
   }
 });
